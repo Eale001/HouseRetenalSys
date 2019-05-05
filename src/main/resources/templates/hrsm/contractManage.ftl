@@ -39,11 +39,11 @@
 </style>
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-2">
-        <h1 style="font-size: 24px; margin: 0;" class="">出库管理</h1>
+        <h1 style="font-size: 24px; margin: 0;" class="">合同管理</h1>
     </div>
     <div class="col-md-10 text-right">
         <a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-            disabled="disabled">出库管理</a>
+            disabled="disabled">合同管理</a>
     </div>
 </div>
 <div class="row" style="padding-top: 15px;">
@@ -53,8 +53,8 @@
             <!--盒子头-->
             <div class="box-header">
                 <h3 class="box-title">
-                    <a href="/findDrugDeliveryInfoById" class="label label-success" style="padding: 5px;">
-                        <span class="glyphicon glyphicon-plus"></span> 新增
+                    <a href="" class="label label-success" style="padding: 5px;">
+                        <span class="glyphicon glyphicon-plus"></span> 刷新
                     </a>
                 </h3>
                 <div class="box-tools">
@@ -74,24 +74,24 @@
                     <table class="table table-hover ">
                         <tr>
 
-                            <th scope="col">药品名称</th>
-                            <th scope="col">药品类别</th>
-                            <th scope="col">出库数量</th>
-                            <th scope="col">出库价格</th>
+                            <th scope="col">房源信息</th>
+                            <th scope="col">甲方</th>
+                            <th scope="col">乙方</th>
+                            <th scope="col">租金</th>
                             <th scope="col">备注</th>
-                            <th scope="col">出库时间</th>
-                            <th scope="col">操作员</th>
+                            <th scope="col">录入人员</th>
+                            <th scope="col">录入时间</th>
                             <th scope="col">操作</th>
                         </tr>
-						<#list drugDeliveryInfoList as item>
+						<#list contractAll as item>
 						<tr>
-                            <td><span>${(item.drugs.drugsName)!''}</span></td>
-                            <td><span>${(item.drugs.cateId)!''}</span></td>
-                            <td><span>${(item.data.deliveryinfoNumber)!''}</span></td>
-                            <td><span>${(item.data.deliveryinfoPrice)!''}</span></td>
-                            <td><span>${(item.data.deliveryinfoRemark)!''}</span></td>
-                            <td><span>${(item.data.createDate)!''}</span></td>
-                            <td><span>${(item.userName)!''}</span></td>
+                            <td><span>${(item.house.title)!''}</span></td>
+                            <td><span>${(item.firstParty)!''}</span></td>
+                            <td><span>${(item.partyB)!''}</span></td>
+                            <td><span>${(item.rent)!''}</span></td>
+                            <td><span>${(item.remark)!''}</span></td>
+                            <td><span>${(item.createUser.userName)!''}</span></td>
+                            <td><span>${(item.createDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
 							<#--<#if item.brandYeaes??>-->
 								<#--<td><span>${item.brandYeaes}</span></td>-->
                             <#--<#else>-->
@@ -99,11 +99,11 @@
                             <#--</#if>-->
                             <#--<td><span>${item.brandComment}</span></td>-->
                             <td>
-                                <a href="/goDrugDeliveryInfoDetail?deliveryinfoId=${item.data.deliveryinfoId}" class="label xiugai">
+                                <a href="/contractDetail?contractId=${item.contractId}" class="label xiugai">
                                     <span class="glyphicon glyphicon-edit"></span> 查看</a>
-                                <a href="/findDrugDeliveryInfoById?deliveryinfoId=${item.data.deliveryinfoId}" class="label xiugai">
-                                    <span class="glyphicon glyphicon-edit"></span> 修改</a>
-                                <a href="/deleteDrugDeliveryInfoById?deliveryinfoId=${item.data.deliveryinfoId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
+                                <#--<a href="/contractEdit?contractId=${item.contractId}" class="label xiugai">-->
+                                    <#--<span class="glyphicon glyphicon-edit"></span> 修改</a>-->
+                                <a href="/contractDelete?contractId=${item.contractId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
                                    class="label shanchu"><span
                                         class="glyphicon glyphicon-remove"></span> 删除</a></td>
                         </tr>

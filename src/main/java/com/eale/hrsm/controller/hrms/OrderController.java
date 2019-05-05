@@ -87,18 +87,26 @@ public class OrderController {
      * @return java.lang.String
      */
     @RequestMapping("orderEdit")
-    public String orderEdit(Model model, HttpSession session, @RequestParam(value = "orderId",required = false) String orderId){
+    public String orderEdit(Model model, HttpSession session, @RequestParam(value = "orderId",required = false) String orderId,@RequestParam(value = "houseId",required = false)String houseId){
 
         User user = userService.findById((Long)session.getAttribute("userId"));
 
         model.addAttribute("user",user);
+
+        if (null != houseId){
+            House house = houseService.findById(Long.parseLong(houseId));
+            model.addAttribute("house",house);
+            return "hrsm/orderBook";
+
+        }
 
         if (!StringUtil.isEmpty(orderId)){
             Order order = orderService.findById(Long.parseLong(orderId));
             model.addAttribute("order",order);
             return "hrsm/orderEdit";
         }
-
+        List<House> houseList = houseService.findAll();
+        model.addAttribute("houseList",houseList);
         return "hrsm/orderEdit";
     }
 
@@ -116,7 +124,7 @@ public class OrderController {
         House house = houseService.findById(Long.parseLong(houseId));
 
         order.setHouse(house);
-        order.setState(0);
+        order.setState(1);
         order.setCreateDate(new Date());
         order.setCreateUser(user);
         orderService.save(order);
@@ -125,25 +133,31 @@ public class OrderController {
     }
 
     /**
-     * @description   确认订单，生成合同
+     * @description   完成订单，生成合同
      * @date: 2019/5/4/004 21:36
      * @author: Eale
      * @prams [orderId, model, session]
      * @return java.lang.String
      */
     @RequestMapping("orderConfirm")
-    public String orderConfirm(Order order,Model model,HttpSession session){
+    public String orderConfirm(Order order,Model model,HttpSession session,Contract contract,String houseId){
 
-        order.setState(1);
-        Contract contract = new Contract();
-        contract.setFirstParty(order.getLandlady());
-        contract.setPartyB(order.getTenant());
-        contract.setAddress(order.getHouse().getDistrict().getRegion().getRegionName()+order.getHouse().getDistrict().getDisName());
-        contract.setBeginDate(order.getBeginDate());
-        contract.setBeginDate(order.getEndDate());
-        contract.setDeposit(order.getHouse().getPrice());
-
-
+        order.setState(2);
+        User user = userService.findById((Long)session.getAttribute("userId"));
+        House house = houseService.findById(Long.parseLong(houseId));
+        Contract contracts = new Contract();
+        contracts.setHouse(house);
+        contracts.setCreateUser(user);
+        contracts.setFirstParty(order.getLandlady());
+        contracts.setPartyB(order.getTenant());
+        contracts.setAddress(order.getHouse().getDistrict().getRegion().getRegionName()+order.getHouse().getDistrict().getDisName());
+        contracts.setBeginDate(order.getBeginDate());
+        contracts.setBeginDate(order.getEndDate());
+        contracts.setDeposit(order.getHouse().getPrice());
+        contracts.setMoney(contract.getMoney());
+        contracts.setRent(contract.getRent());
+        contracts.setOrder(order);
+        contractService.save(contracts);
 
         return "";
     }

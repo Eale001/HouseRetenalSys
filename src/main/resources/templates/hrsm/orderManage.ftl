@@ -39,11 +39,11 @@
 </style>
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-2">
-        <h1 style="font-size: 24px; margin: 0;" class="">类别管理</h1>
+        <h1 style="font-size: 24px; margin: 0;" class="">订单管理</h1>
     </div>
     <div class="col-md-10 text-right">
         <a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-            disabled="disabled">类别管理</a>
+            disabled="disabled">订单管理</a>
     </div>
 </div>
 <div class="row" style="padding-top: 15px;">
@@ -53,7 +53,7 @@
             <!--盒子头-->
             <div class="box-header">
                 <h3 class="box-title">
-                    <a href="/findDrugCateById" class="label label-success" style="padding: 5px;">
+                    <a href="/orderEdit" class="label label-success" style="padding: 5px;">
                         <span class="glyphicon glyphicon-plus"></span> 新增
                     </a>
                 </h3>
@@ -74,16 +74,28 @@
                     <table class="table table-hover ">
                         <tr>
 
-                            <th scope="col">类别名称</th>
+                            <th scope="col">房源信息</th>
+                            <th scope="col">租客</th>
+                            <th scope="col">房东</th>
+                            <th scope="col">起租时间</th>
+                            <th scope="col">结束时间</th>
+                            <th scope="col">备注</th>
+                            <th scope="col">订单状态</th>
                             <th scope="col">录入人员</th>
                             <th scope="col">录入时间</th>
                             <th scope="col">操作</th>
                         </tr>
-						<#list drugCateList as item>
+						<#list orderAll as item>
 						<tr>
-                            <td><span>${(item.cateName)!''}</span></td>
-                            <td><span>${(item.createUserid)!''}</span></td>
-                            <td><span>${(item.createDate)!''}</span></td>
+                            <td><span>${(item.house.title)!''}</span></td>
+                            <td><span>${(item.tenant)!''}</span></td>
+                            <td><span>${(item.landlady)!''}</span></td>
+                            <td><span>${(item.beginDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
+                            <td><span>${(item.endDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
+                            <td><span>${(item.remark)!''}</span></td>
+                            <td><span>${(item.state)!''}</span></td>
+                            <td><span>${(item.createUser.userName)!''}</span></td>
+                            <td><span>${(item.createDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
 							<#--<#if item.brandYeaes??>-->
 								<#--<td><span>${item.brandYeaes}</span></td>-->
                             <#--<#else>-->
@@ -91,11 +103,11 @@
                             <#--</#if>-->
                             <#--<td><span>${item.brandComment}</span></td>-->
                             <td>
-                                <a href="/goDrugCateDetail?cateId=${item.cateId}" class="label xiugai">
-                                    <span class="glyphicon glyphicon-edit"></span> 查看</a>
-                                <a href="/findDrugCateById?cateId=${item.cateId}" class="label xiugai">
+                                <a href="/orderConfirm?orderId=${item.orderId}" class="label xiugai">
+                                    <span class="glyphicon glyphicon-edit"></span> 生成合同</a>
+                                <a href="/orderEdit?orderId=${item.orderId}" class="label xiugai">
                                     <span class="glyphicon glyphicon-edit"></span> 修改</a>
-                                <a href="/deleteDrugCateById?cateId=${item.cateId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
+                                <a href="/orderDelete?orderId=${item.orderId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
                                    class="label shanchu"><span
                                         class="glyphicon glyphicon-remove"></span> 删除</a></td>
                         </tr>

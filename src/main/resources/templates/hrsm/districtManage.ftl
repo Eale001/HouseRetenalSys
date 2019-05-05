@@ -84,8 +84,8 @@
 						<tr>
                             <td><span>${(item.disName)!''}</span></td>
                             <td><span>${(item.region.regionName)!''}</span></td>
-                            <td><span>${(item.createUser)!''}</span></td>
-                            <td><span>${(item.createDate)!''}</span></td>
+                            <td><span>${(item.createUser.userName)!''}</span></td>
+                            <td><span>${(item.createDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
 							<#--<#if item.brandYeaes??>-->
 								<#--<td><span>${item.brandYeaes}</span></td>-->
                             <#--<#else>-->

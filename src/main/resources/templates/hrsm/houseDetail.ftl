@@ -38,7 +38,7 @@
                 </h3>
             </div>
             <!--盒子身体-->
-            <form action="/houseSave" method="post" onsubmit="return check();">
+            <form action="/orderEdit" method="post" onsubmit="return check();">
                 <div class="box-body no-padding">
                     <div class="box-body">
                         <!--錯誤信息提示  -->
@@ -123,7 +123,7 @@
                                 <label>
                                     <span id="ctl00_cphMain_Label2">录入人员</span>
                                 </label>
-                                <input name="createUser" type="text" value="${(user.userName)!''}"
+                                <input name="userName" type="text" value="${(user.userName)!''}"
                                        style="background-color:#fff;" class="form-control" readonly/>
                             </div>
 
@@ -131,11 +131,11 @@
                     </div>
                 </div>
                 <!--盒子尾-->
-                <#--<div class="box-footer">-->
-                    <#--<input class="btn btn-primary" id="save" type="submit" value="保存"/>-->
-                    <#--<input class="btn btn-default" id="cancel" type="button" value="取消"-->
-                           <#--onclick="window.history.back();"/>-->
-                <#--</div>-->
+                <div class="box-footer">
+                    <input class="btn btn-primary" id="save" type="submit" value="预约"/>
+                    <input class="btn btn-default" id="cancel" type="button" value="取消"
+                           onclick="window.history.back();"/>
+                </div>
             </form>
         </div>
     </div>

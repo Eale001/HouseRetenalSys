@@ -17,11 +17,11 @@
 
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-2">
-        <h1 style="font-size: 24px; margin: 0;" class="">销售管理</h1>
+        <h1 style="font-size: 24px; margin: 0;" class="">订单管理</h1>
     </div>
     <div class="col-md-10 text-right">
         <a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-            disabled="disabled">销售管理</a>
+            disabled="disabled">订单管理</a>
     </div>
 </div>
 <div class="row" style="padding-top: 15px;">
@@ -38,7 +38,7 @@
                 </h3>
             </div>
             <!--盒子身体-->
-            <form action="/saveDrugSaleInfo" method="post" onsubmit="return check();">
+            <form action="/orderSave" method="post" onsubmit="return check();">
                 <div class="box-body no-padding">
                     <div class="box-body">
                         <!--錯誤信息提示  -->
@@ -51,12 +51,12 @@
 
                             <div class="col-md-6 form-group">
                                 <label>
-                                    <span id="ctl00_cphMain_Label1">药品名称</span>
+                                    <span id="ctl00_cphMain_Label1">房源</span>
                                 </label>
 
-                                <select class="form-control" name="drugsId">
-							        <#list drugsList as drugs>
-                                        <option value="${(drugs.drugsId)!''}">${(drugs.drugsName)!''}</option>
+                                <select class="form-control" name="regionId" readonly="">
+							        <#list houseList as house>
+                                        <option value="${(house.houseId)!''}">${(house.title)!''}</option>
                                     </#list>
                                 </select>
 
@@ -64,23 +64,41 @@
 
                             <div class="col-md-6 form-group">
                                 <label>
-                                    <span id="ctl00_cphMain_Label1">销售数量</span>
+                                    <span id="ctl00_cphMain_Label1">租客</span>
                                 </label>
-                                <input name="saleinfoNumber" type="text" value="${(drugSaleInfo.drugSaleInfo.saleinfoNumber)!''}" class="form-control"/>
-                                <input name="saleinfoId" type="text" value="${(drugSaleInfo.drugSaleInfo.saleinfoId)!''}" hidden="hidden"/>
+                                <input name="tenant" type="text" value="${(order.tenant)!''}" class="form-control"/>
+                                <input name="orderId" type="text" value="${(order.orderId)!''}" hidden="hidden"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>
-                                    <span id="ctl00_cphMain_Label2">销售价格</span>
+                                    <span id="ctl00_cphMain_Label1">房东</span>
                                 </label>
-                                <input name="saleinfoPrice" type="text" value="${(drugSaleInfo.drugSaleInfo.saleinfoPrice)!''}"
-                                       style="background-color:#fff;" class="form-control"/>
+                                <input name="landlady" type="text" value="${(order.landlady)!''}" class="form-control"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>
-                                    <span id="ctl00_cphMain_Label2">销售人员</span>
+                                    <span id="ctl00_cphMain_Label1">起租时间</span>
                                 </label>
-                                <input name="saleUserid" type="text" value="${(user.userName)!''}"
+                                <input name="beginDate" onclick="WdatePicker()" value="${(order.beginDate)?string("yyyy-MM-dd HH:mm:ss")}" class="form-control"/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">结束时间</span>
+                                </label>
+                                <input name="endDate" onclick="WdatePicker()" value="${(order.endDate)?string("yyyy-MM-dd HH:mm:ss")}" class="form-control"/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">备注</span>
+                                </label>
+                                <input name="remark" type="text" value="${(order.remark)!''}" class="form-control"/>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label2">录入人员</span>
+                                </label>
+                                <input name="userName" type="text" value="${(user.userName)!''}"
                                        style="background-color:#fff;" class="form-control" readonly/>
                             </div>
 
@@ -89,7 +107,7 @@
                 </div>
                 <!--盒子尾-->
                 <div class="box-footer">
-                    <input class="btn btn-primary" id="save" type="submit" value="保存"/>
+                    <input class="btn btn-primary" id="save" type="submit" value="确定预约"/>
                     <input class="btn btn-default" id="cancel" type="button" value="取消"
                            onclick="window.history.back();"/>
                 </div>
@@ -140,3 +158,5 @@
 //	return false;
     }
 </script>
+<script type="text/javascript" src="js/common/data.js"></script>
+<script type="text/javascript" src="plugins/My97DatePicker/WdatePicker.js"></script>

@@ -17,11 +17,11 @@
 
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-2">
-        <h1 style="font-size: 24px; margin: 0;" class="">类别管理</h1>
+        <h1 style="font-size: 24px; margin: 0;" class="">订单管理</h1>
     </div>
     <div class="col-md-10 text-right">
         <a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-            disabled="disabled">类别管理</a>
+            disabled="disabled">订单管理</a>
     </div>
 </div>
 <div class="row" style="padding-top: 15px;">
@@ -38,7 +38,7 @@
                 </h3>
             </div>
             <!--盒子身体-->
-            <form action="/saveDrugCate" method="post" onsubmit="return check();">
+            <form action="/orderConfirm" method="post" onsubmit="return check();">
                 <div class="box-body no-padding">
                     <div class="box-body">
                         <!--錯誤信息提示  -->
@@ -51,16 +51,72 @@
 
                             <div class="col-md-6 form-group">
                                 <label>
-                                    <span id="ctl00_cphMain_Label1">类别名称</span>
+                                    <span id="ctl00_cphMain_Label1">房源</span>
                                 </label>
-                                <input name="cateName" type="text" value="${(drugscate.cateName)!''}" class="form-control"/>
-                                <input name="cateId" type="text" value="${(drugscate.cateId)!''}" hidden="hidden"/>
+                                <select class="form-control" name="houseId" readonly="">
+                                        <option value="${(order.house.houseId)!''}">${(order.house.title)!''}</option>
+                                    </#list>
+                                </select>
+
                             </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">租客</span>
+                                </label>
+                                <input name="tenant" type="text" value="${(order.tenant)!''}" class="form-control" readonly/>
+                                <input name="orderId" type="text" value="${(order.orderId)!''}" hidden="hidden"/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">房东</span>
+                                </label>
+                                <input name="landlady" type="text" value="${(order.landlady)!''}" class="form-control" readonly/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">起租时间</span>
+                                </label>
+                                <input name="beginDate" onclick="WdatePicker()" value="${(order.beginDate)?string("yyyy-MM-dd HH:mm:ss")}" class="form-control" readonly/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">结束时间</span>
+                                </label>
+                                <input name="endDate" onclick="WdatePicker()" value="${(order.endDate)?string("yyyy-MM-dd HH:mm:ss")}" class="form-control" readonly/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">备注</span>
+                                </label>
+                                <input name="remark" type="text" value="${(order.remark)!''}" class="form-control" readonly/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">押金</span>
+                                </label>
+                                <input name="price" type="text" value="${(order.house.price)!''}" class="form-control" readonly/>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">租金</span>
+                                </label>
+                                <input name="rent" type="text"  class="form-control" readonly/>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    <span id="ctl00_cphMain_Label1">已经交付</span>
+                                </label>
+                                <input name="money" type="text"  class="form-control" readonly/>
+                            </div>
+
                             <div class="col-md-6 form-group">
                                 <label>
                                     <span id="ctl00_cphMain_Label2">录入人员</span>
                                 </label>
-                                <input name="createUserid" type="text" value="${(user.userName)!''}"
+                                <input name="userName" type="text" value="${(user.userName)!''}"
                                        style="background-color:#fff;" class="form-control" readonly/>
                             </div>
 
@@ -69,7 +125,7 @@
                 </div>
                 <!--盒子尾-->
                 <div class="box-footer">
-                    <input class="btn btn-primary" id="save" type="submit" value="保存"/>
+                    <input class="btn btn-primary" id="save" type="submit" value="生成合同"/>
                     <input class="btn btn-default" id="cancel" type="button" value="取消"
                            onclick="window.history.back();"/>
                 </div>
@@ -120,3 +176,5 @@
 //	return false;
     }
 </script>
+<script type="text/javascript" src="js/common/data.js"></script>
+<script type="text/javascript" src="plugins/My97DatePicker/WdatePicker.js"></script>

@@ -37,15 +37,15 @@
     }
 
 </style>
-<div class="row" style="padding-top: 10px;">
-    <div class="col-md-2">
-        <h1 style="font-size: 24px; margin: 0;" class="">入库管理</h1>
-    </div>
-    <div class="col-md-10 text-right">
-        <a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-            disabled="disabled">入库管理</a>
-    </div>
-</div>
+<#--<div class="row" style="padding-top: 10px;">-->
+    <#--<div class="col-md-2">-->
+        <#--<h1 style="font-size: 24px; margin: 0;" class="">街道管理</h1>-->
+    <#--</div>-->
+    <#--<div class="col-md-10 text-right">-->
+        <#--<a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a-->
+            <#--disabled="disabled">街道管理</a>-->
+    <#--</div>-->
+<#--</div>-->
 <div class="row" style="padding-top: 15px;">
     <div class="col-md-12 thistable">
         <!--id="container"-->
@@ -53,7 +53,7 @@
             <!--盒子头-->
             <div class="box-header">
                 <h3 class="box-title">
-                    <a href="/findDrugIncomingInfoById" class="label label-success" style="padding: 5px;">
+                    <a href="/houseEdit" class="label label-success" style="padding: 5px;">
                         <span class="glyphicon glyphicon-plus"></span> 新增
                     </a>
                 </h3>
@@ -74,26 +74,32 @@
                     <table class="table table-hover ">
                         <tr>
 
-                            <th scope="col">药品名称</th>
-                            <th scope="col">药品类别</th>
-                            <th scope="col">入库数量</th>
-                            <th scope="col">入库价格</th>
-                            <th scope="col">备注</th>
-                            <th scope="col">供应商</th>
-                            <th scope="col">出库时间</th>
-                            <th scope="col">操作员</th>
+                            <th scope="col">标题</th>
+                            <th scope="col">图片</th>
+                            <th scope="col">面积</th>
+                            <th scope="col">租金</th>
+                            <th scope="col">地区</th>
+                            <th scope="col">房屋类型</th>
+                            <th scope="col">联系电话</th>
+                            <th scope="col">联系人</th>
+                            <th scope="col">描述</th>
+                            <th scope="col">录入人员</th>
+                            <th scope="col">录入时间</th>
                             <th scope="col">操作</th>
                         </tr>
-						<#list drgusVOSList as item>
+						<#list houseAll as item>
 						<tr>
-                            <td><span>${(item.drugs.drugsName)!''}</span></td>
-                            <td><span>${(item.drugs.cateId)!''}</span></td>
-                            <td><span>${(item.drugIncomingInfo.incominginfoNumber)!''}</span></td>
-                            <td><span>${(item.drugIncomingInfo.incominginfoPrice)!''}</span></td>
-                            <td><span>${(item.drugIncomingInfo.incominginfoRemark)!''}</span></td>
-                            <td><span>${(item.drugSupplier.supplierName)!''}</span></td>
-                            <td><span>${(item.drugIncomingInfo.createDate)!''}</span></td>
-                            <td><span>${(item.userName)!''}</span></td>
+                            <td><span>${(item.title)!''}</span></td>
+                            <td><span>${(item.price)!''}</span></td>
+                            <td><span>${(item.area)!''}</span></td>
+                            <td><span>${(item.price)!''}</span></td>
+                            <td><span>${(item.district.region.regionName)!''}${(item.district.disName)!''}</span></td>
+                            <td><span>${(item.type.typeName)!''}</span></td>
+                            <td><span>${(item.phone)!''}</span></td>
+                            <td><span>${(item.contacts)!''}</span></td>
+                            <td><span>${(item.discription)!''}</span></td>
+                            <td><span>${(item.createUser.userName)!''}</span></td>
+                            <td><span>${(item.createDate)?string("yyyy-MM-dd HH:mm:ss")}</span></td>
 							<#--<#if item.brandYeaes??>-->
 								<#--<td><span>${item.brandYeaes}</span></td>-->
                             <#--<#else>-->
@@ -101,11 +107,11 @@
                             <#--</#if>-->
                             <#--<td><span>${item.brandComment}</span></td>-->
                             <td>
-                                <a href="/goDrugsIncomingInfoDetail?incominginfoId=${item.drugIncomingInfo.incominginfoId}" class="label xiugai">
+                                <a href="/houseDetail?houseId=${item.houseId}" class="label xiugai">
                                     <span class="glyphicon glyphicon-edit"></span> 查看</a>
-                                <a href="/findDrugIncomingInfoById?incominginfoId=${item.drugIncomingInfo.incominginfoId}" class="label xiugai">
+                                <a href="/houseEdit?houseId=${item.houseId}" class="label xiugai">
                                     <span class="glyphicon glyphicon-edit"></span> 修改</a>
-                                <a href="/deleteDrugIncomingInfoById?incominginfoId=${item.drugIncomingInfo.incominginfoId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
+                                <a href="/houseDelete?houseId=${item.houseId}" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
                                    class="label shanchu"><span
                                         class="glyphicon glyphicon-remove"></span> 删除</a></td>
                         </tr>

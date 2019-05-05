@@ -72,7 +72,7 @@
 	</ol>
 </div>
 <!--四个面板-->
-<#include "/drugs/drugsInventoryInfoManage.ftl">
+<#include "../hrsm/houseManageHome.ftl">
 <#--<div class="container-fluid">-->
 	<#--<div class="row">-->
 

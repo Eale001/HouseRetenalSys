@@ -45,7 +45,7 @@
 <div class="col-lg-2 col-md-2 smallDiv"
 	style="padding: 0; margin: 0; display: block;">
 	<div class="col-md-12 green-g">
-		<a href="index" class="navbar-brand" style="padding: 8px 40px;"><span style="color: #ffffff;">欢迎来到药品管理系统</span></a>
+		<a href="index" class="navbar-brand" style="padding: 8px 40px;"><span style="color: #ffffff;">房屋出租管理系统</span></a>
 	</div>
 	<div class="col-md-12 list-left"
 		style="background: #222d32; height: 845px">

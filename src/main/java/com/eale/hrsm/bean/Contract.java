@@ -189,4 +189,12 @@ public class Contract {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
